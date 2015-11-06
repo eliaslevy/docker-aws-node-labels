@@ -5,6 +5,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: aws-node-labels
+  namespace: kube-system
 spec:
   hostNework: true
   restartPolicy: OnFailure

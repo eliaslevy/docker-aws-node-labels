@@ -14,7 +14,7 @@ while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
         --cert   /etc/kubernetes/ssl/worker.pem \
         --key    /etc/kubernetes/ssl/worker-key.pem \
         --cacert /etc/kubernetes/ssl/ca.pem  \
-        ${CONTROLLER_ENDPOINT}/api/v1/namespaces/default/pods/${HOSTNAME} | jq -r '.spec.nodeName'
+        ${CONTROLLER_ENDPOINT}/api/v1/namespaces/kube-system/pods/${HOSTNAME} | jq -r '.spec.nodeName'
   `
 done
 
