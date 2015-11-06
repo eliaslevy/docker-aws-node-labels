@@ -6,7 +6,7 @@ INSTANCE_TYPE=`${MD}/instance-type`
 AVAILABILITY_ZONE=`${MD}/placement/availability-zone`
 
 # It appears it takes a while for the hostname to incorporate the node name.
-while [ -z "$NODE" ]; do
+while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
   sleep 1
   HOSTNAME=`hostname`
   echo Hostname: $HOSTNAME
