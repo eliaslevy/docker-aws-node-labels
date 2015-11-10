@@ -10,7 +10,7 @@ while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
   sleep 1
   HOSTNAME=`hostname`
   echo Hostname: $HOSTNAME
-  NODE=`curl  -s \
+  NODE=`curl  -s -f \
         --cert   /etc/kubernetes/ssl/worker.pem \
         --key    /etc/kubernetes/ssl/worker-key.pem \
         --cacert /etc/kubernetes/ssl/ca.pem  \
