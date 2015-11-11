@@ -4,7 +4,7 @@ MD="curl -s http://169.254.169.254/latest/meta-data/"
 INSTANCE_ID=`${MD}/instance-id`
 INSTANCE_TYPE=`${MD}/instance-type`
 AVAILABILITY_ZONE=`${MD}/placement/availability-zone`
-SECURITY_GROUPS=`${MD}/security-groups | tr '\n' ','`
+SECURITY_GROUPS=$(echo `${MD}/security-groups` | tr '\n' ',')
 
 # It appears it takes a while for the hostname to incorporate the node name.
 while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
