@@ -10,7 +10,7 @@ SECURITY_GROUPS=$(echo `${MD}/security-groups` | tr '\n' ',')
 while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
   sleep 1
   HOSTNAME=`hostname`
-  echo Hostname: $HOSTNAME
+  echo "[$(date)] Hostname: $HOSTNAME"
   NODE=`curl  -s -f \
         --cert   /etc/kubernetes/ssl/worker.pem \
         --key    /etc/kubernetes/ssl/worker-key.pem \
@@ -19,7 +19,7 @@ while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
   `
 done
 
-echo Node: $NODE
+echo "[$(date)] Node: $NODE"
 
 curl  -s \
       --cert   /etc/kubernetes/ssl/worker.pem \
