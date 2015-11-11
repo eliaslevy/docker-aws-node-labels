@@ -14,7 +14,7 @@ while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
         --cert   /etc/kubernetes/ssl/worker.pem \
         --key    /etc/kubernetes/ssl/worker-key.pem \
         --cacert /etc/kubernetes/ssl/ca.pem  \
-        ${CONTROLLER_ENDPOINT}/api/v1/namespaces/kube-system/pods/${HOSTNAME} | jq -r '.spec.nodeName'
+        https://${KUBERNETES_SERVICE_HOST}/api/v1/namespaces/kube-system/pods/${HOSTNAME} | jq -r '.spec.nodeName'
   `
 done
 
@@ -27,7 +27,7 @@ curl  -s \
       --request PATCH \
       -H "Content-Type: application/strategic-merge-patch+json" \
       -d @- \
-      ${CONTROLLER_ENDPOINT}/api/v1/nodes/${NODE} <<EOF
+      https://${KUBERNETES_SERVICE_HOST}/api/v1/nodes/${NODE} <<EOF
 {
   "metadata": {
     "labels": {
