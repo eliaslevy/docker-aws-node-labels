@@ -16,9 +16,6 @@ spec:
       image: elevy/aws-node-labels:latest
       securityContext:
         privileged: true
-      env:
-        - name: CONTROLLER_ENDPOINT
-          value: "${CONTROLLER_ENDPOINT}"
       volumeMounts:
         - mountPath: /etc/kubernetes/ssl
           name: kubernetes-ssl
@@ -28,5 +25,3 @@ spec:
       hostPath:
         path: /etc/kubernetes/ssl
 ```
-
-Where `${CONTROLLER_ENDPOINT}` would be replaced by your Kubernetes API server endpoint
