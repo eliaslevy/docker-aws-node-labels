@@ -32,10 +32,12 @@ curl  -s \
 {
   "metadata": {
     "labels": {
-      "aws.node.kubernetes.io/id": "${INSTANCE_ID}",
+      "aws.node.kubernetes.io/id":   "${INSTANCE_ID}",
       "aws.node.kubernetes.io/type": "${INSTANCE_TYPE}",
-      "aws.node.kubernetes.io/az": "${AVAILABILITY_ZONE}",
-      "aws.node.kubernetes.io/sgs": "${SECURITY_GROUPS}"
+      "aws.node.kubernetes.io/az":   "${AVAILABILITY_ZONE}"
+    },
+    "annotations": {
+      "aws.node.kubernetes.io/sgs":  "${SECURITY_GROUPS}"
     } 
   } 
 }
