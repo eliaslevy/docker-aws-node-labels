@@ -6,16 +6,15 @@ INSTANCE_TYPE=`${MD}/instance-type`
 AVAILABILITY_ZONE=`${MD}/placement/availability-zone`
 SECURITY_GROUPS=`${MD}/security-groups | tr '\n' ','`
 
-# It appears it takes a while for the hostname to incorporate the node name.
+# It appears it takes a while for the pod to incorporate the node name.
 while [ "x$NODE" = "x" ] || [ "$NODE" = "null" ]; do
   sleep 1
-  HOSTNAME=`hostname`
-  echo "[$(date)] Hostname: $HOSTNAME"
+  echo "[$(date)] Pod: $POD_NAME"
   NODE=`curl  -s -f \
         --cert   /etc/kubernetes/ssl/worker.pem \
         --key    /etc/kubernetes/ssl/worker-key.pem \
         --cacert /etc/kubernetes/ssl/ca.pem  \
-        https://${KUBERNETES_SERVICE_HOST}/api/v1/namespaces/kube-system/pods/${HOSTNAME} | jq -r '.spec.nodeName'
+        https://${KUBERNETES_SERVICE_HOST}/api/v1/namespaces/kube-system/pods/${POD_NAME} | jq -r '.spec.nodeName'
   `
 done
 
@@ -38,7 +37,7 @@ curl  -s \
     },
     "annotations": {
       "aws.node.kubernetes.io/sgs":  "${SECURITY_GROUPS}"
-    } 
-  } 
+    }
+  }
 }
 EOF
